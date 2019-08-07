@@ -6,7 +6,7 @@ Clean Code should:
 > Be easily readeable.  
 > Reveals its intent.
 
-Output parameters:
+### Output parameters:
 Avoid as much as possible output parameters, usually it is a good idea to return a class with meaningful properties:  
 
 ```cs
@@ -45,3 +45,9 @@ But *there are exceptions*!!
 In the .Net world methods like `TryGetValue`and `TryParse` follow the patter of returning a boolean as method return an the desired value as an out parameter:  
 [TryGetValue](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue?view=netcore-2.2)  
 [TryParse](https://docs.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=netcore-2.2)
+
+### Number of parameters
+
+As always there is no silver bullet, but it is usually a good idea to keep the number of parameters below 3.  
+In case the method signature starts to get too big it is possibly a indicator that either the method is doing too much OR a class should be created to encapsulate it.  
+
