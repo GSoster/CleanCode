@@ -51,3 +51,28 @@ In the .Net world methods like `TryGetValue`and `TryParse` follow the patter of 
 As always there is no silver bullet, but it is usually a good idea to keep the number of parameters below 3.  
 In case the method signature starts to get too big it is possibly a indicator that either the method is doing too much OR a class should be created to encapsulate it.  
 
+### Return Types instead of null
+
+Sometimes our methods don't have the information that was requested. In those cases what should be returned? Null? Default (type)?
+
+* If the method is expected to return a *collection* (group of items) then it *should return an empty collection*.
+
+```cs
+public IEnumerable<User> GetActiveUsers()
+{
+     //...code here
+    // in the negative scenario where we dont have what we expect, just return an empty collection
+    return new List<User>();
+}
+```
+
+* Otherwise if the type is not a collection, it is better to return null (exceptions should be used for non expected behaviour, not common situations)
+
+```cs
+public MyFileType LoadFile(string path)
+{
+    //..code here
+    return null;
+}
+
+```
