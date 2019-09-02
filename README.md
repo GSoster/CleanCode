@@ -76,3 +76,85 @@ public MyFileType LoadFile(string path)
 }
 
 ```
+
+### Nested conditionals
+
+There are some ways to avoid nested conditionals:
+
+* Early Exit
+
+```cs
+if (a)
+{
+    if (b)
+    {
+        //do stuff
+    }
+}
+//becomes:
+if (!a)
+    return;
+if (!b)
+    return;
+//do stuff
+
+```
+
+* Ternary Operator
+
+```cs
+if (player.HitPoints > 50)
+    regenBonus = 0.5f;
+else
+    regenBonus = 0.1f;
+//becomes:
+regenBonus = (player.HitPoints > 50) ? 0.5f : 0.1f;
+
+```
+
+### Switch Statements
+
+In many cases it can be replaced with polymorphic dispatch.
+
+```cs
+
+//this 
+public void TakeDamage(float damage)
+{
+    switch (livingEntity.Type)
+    {
+        case EntityTypes.Monster:
+            livingEntity.HP -= (damage * 1.1);
+
+        case  EntityTypes.ArmoredMonster:
+            livingEntity.HP -= (damage * 0.5);
+
+        case  EntityTypes.Player:
+            livingEntity.HP -= (damage);
+    }
+}
+
+//becomes:
+
+public abstract class LivingEntity
+{
+    public float HP {get;set;}
+    public abstract void TakeDamage(float damage);
+}
+
+public class Monster : LivingEntity
+{
+    public override void TakeDamage(float damage) => HP -= (damage * 1.1);
+}
+
+public class Player : LivingEntity
+{
+    public override void TakeDamage(float damage) => HP -= damage;
+}
+
+public class ArmoredMonster : LivingEntity
+{
+    public override void TakeDamage(float damage) => HP -= (damage * 0.5);
+}
+
+```
