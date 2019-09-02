@@ -6,7 +6,13 @@ Clean Code should:
 > Be easily readeable.  
 > Reveals its intent.
 
-### Output parameters:
+## What this repo is
+
+I only added here what I considered relevant. Here are some notes I gathered from my experience, from books like *clean code* by robert c. martin and from online videos and courses.  
+For a more complete documentation on clean code please refear to [https://github.com/thangchung/clean-code-dotnet](https://github.com/thangchung/clean-code-dotnet)
+
+### Output parameters
+
 Avoid as much as possible output parameters, usually it is a good idea to return a class with meaningful properties:  
 
 ```cs
@@ -118,7 +124,7 @@ In many cases it can be replaced with polymorphic dispatch.
 
 ```cs
 
-//this 
+//this
 public void TakeDamage(float damage)
 {
     switch (livingEntity.Type)
